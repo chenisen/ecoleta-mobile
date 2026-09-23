@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import { Feather as Icon } from '@expo/vector-icons';
 import { RectButton } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
+import { ParamListBase, useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import RNPickerSelect from 'react-native-picker-select';
 import axios from 'axios';
 
@@ -27,7 +28,7 @@ interface PickerItem {
 }
 
 const Home = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
     const [selectedCity, setSelectedCity] = useState<string>('0');
     const [selectedUF, setSelectedUF] = useState<string>('0');
 

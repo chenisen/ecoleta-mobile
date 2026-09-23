@@ -1,5 +1,4 @@
 import React from 'react';
-import { AppLoading } from 'expo';
 import { StatusBar } from 'react-native';
 import Routes from './src/routes';
 import { Roboto_400Regular, Roboto_500Medium } from '@expo-google-fonts/roboto';
@@ -13,7 +12,7 @@ export default function App() {
   });
 
   return !fontsLoaded
-  ? <AppLoading/>
+  ? null
   : (
     <>
       <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent/>
