@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Image, TouchableOpacity, Text, ScrollView, Alert } from 'react-native';
 import Constants from 'expo-constants';
 import { Feather as Icon } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { ParamListBase, useNavigation, useRoute } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import MapView, { Marker } from 'react-native-maps';
 import { SvgUri } from 'react-native-svg';
 import api from '../../services/api';
@@ -30,7 +31,7 @@ interface Params {
 const Points: React.FC = () => {
 	const route = useRoute();
 	const routeParams = route.params as Params;
-    const navigation = useNavigation();
+    const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
     const [items, setItems] = useState<Item[]>([]);
     const [points, setPoints] = useState<Point[]>([]);
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
@@ -45,7 +46,7 @@ const Points: React.FC = () => {
 
     useEffect(() => {
         async function loadPosition() {
-            const { status } = await Location.requestPermissionsAsync();
+            const { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
                 console.log(status);
                 Alert.alert('Ops...', 'Precisamos de sua permissão para obter sua localização');
